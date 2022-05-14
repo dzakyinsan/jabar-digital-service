@@ -1,0 +1,54 @@
+.home {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .image {
+    width: 400px;
+  }
+  figure {
+    position: relative;
+    overflow: hidden;
+    margin: 0 10px;
+    cursor: pointer;
+  }
+  .overlay {
+    position: absolute;
+    top: 0px;
+    left: 130px;
+    height: 100%;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  .title {
+    background: transparent;
+  }
+  .title h2 {
+    background: transparent;
+    color: white;
+  }
+
+  .image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: brightness(60%);
+    padding: 1em;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+  }
+  .image #zoom-In figure img {
+    transform: scale(1);
+    transition: 0.3s ease-in-out;
+  }
+  .image #zoom-In figure:hover img {
+    transform: scale(1.2);
+    filter: brightness(90%);
+  }
+  .image #zoom-In figure:hover .overlay {
+    opacity: 1;
+  }
+}

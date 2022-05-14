@@ -1,0 +1,23 @@
+.top-list {
+  height: 100vh;
+  .main-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 100px 250px;
+    .header-list {
+      display: flex;
+      h1 {
+        font-size: 40px;
+        font-weight: 900;
+      }
+      span {
+        font-size: 14px;
+        color: grey;
+      }
+    }
+    .body-list {
+      width: -webkit-fill-available;
+    }
+  }
+}
