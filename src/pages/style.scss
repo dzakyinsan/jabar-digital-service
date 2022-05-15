@@ -4,7 +4,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 100px 250px;
+    margin: 40px 250px;
+    .back-btn {
+      width: -webkit-fill-available;
+      margin-bottom: 35px;
+      span {
+        font-size: 35px;
+        color: darkgray;
+      }
+    }
+    .back-btn:hover {
+      cursor: pointer;
+    }
     .header-list {
       display: flex;
       h1 {
@@ -18,6 +29,11 @@
     }
     .body-list {
       width: -webkit-fill-available;
+      .col-name {
+        img {
+          height: fit-content;
+        }
+      }
     }
   }
 }

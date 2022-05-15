@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Table, Input } from "antd";
+import './baseList.scss'
 
 const { Search } = Input;
-
 var _ = require("lodash");
 
 interface IData {
@@ -18,12 +18,12 @@ interface IBaseListProps {
   columns: any;
   api: string;
   responseApi: string;
+  responseSearch: string;
+  type:string;
 }
 
 const BaseListComponent = (props: IBaseListProps) => {
   const [dataList, setDataList] = useState<IData[]>([]);
-  const [filteredArtist, setFilteredArtist] = useState<IData[]>([]);
-  const [search, setSearch] = useState<string>("");
 
   const getDataList = async () => {
     const res = await fetch(props.api);
@@ -34,9 +34,26 @@ const BaseListComponent = (props: IBaseListProps) => {
     }
   };
 
-  useEffect(() => {
-    setFilteredArtist(dataList?.filter((artist) => artist.name.toLowerCase().includes(search.toLowerCase())))
-  }, [dataList, search]);
+  const getSearch = async (val: string) => {
+    let api
+    if(props.type === 'artists'){
+      api = `http://ws.audioscrobbler.com/2.0/?method=artist.search&artist=${val}&api_key=1ea7c721c802722ddf3f4c5ef79077ce&format=json`
+    } else {
+      api = `http://ws.audioscrobbler.com/2.0/?method=track.search&track=${val}&api_key=1ea7c721c802722ddf3f4c5ef79077ce&format=json`
+    }
+
+    const res = await fetch(api);
+    const data = await res.json();
+
+    if (data) {
+      setDataList(_.get(data, props.responseSearch));
+    }
+  }; 
+
+  const onSearch =(val: string)=>{
+    if(val) getSearch(val)
+    else getDataList()
+  }
 
   useEffect(() => {
     getDataList();
@@ -44,14 +61,15 @@ const BaseListComponent = (props: IBaseListProps) => {
   }, []);
 
   return (
-    <>
+    <div className="base-list">
       <Search
+        className="search"
         placeholder="input search text"
-        onChange={(e) => setSearch(e.target.value)}
+        onSearch={(val) => onSearch(val)}
         style={{ width: 200 }}
       />
-      <Table columns={props.columns} dataSource={filteredArtist} />
-    </>
+      <Table columns={props.columns} dataSource={dataList} />
+    </div>
   );
 };
 

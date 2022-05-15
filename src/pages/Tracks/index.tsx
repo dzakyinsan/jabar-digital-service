@@ -1,40 +1,57 @@
+import {useHistory} from 'react-router-dom'
+import { LeftCircleFilled } from '@ant-design/icons';
 import BaseListComponent from "../../components/baseList";
 
 import "./../style.scss";
 
 const TrackListComponent = () => {
+  const router = useHistory()
+
   const columns = [
     {
-      title: "Name",
+      title: "Title",
       dataIndex: "name",
       key: "name",
-      // render: text => <a>{text}</a>,
+      width: '35%',
+      render: (val:string, record:any) =>(
+        <div className="d-flex col-name">
+          <img src={record.image[0]['#text']} alt='img' className="mr-3"/>
+          <p>{val}</p>
+        </div>
+      ),
+    },
+    {
+      title: "Artist",
+      dataIndex: "artist",
+      key: "artist",
+      width: '20%',
+      render: (val: any) => <p>{val.name}</p>
     },
     {
       title: "Play Count",
       dataIndex: "playcount",
       key: "playcount",
+      width: '20%',
     },
     {
-      title: "Streamable",
-      dataIndex: "streamable",
-      key: "streamable",
-    },
-    {
-      title: "Listener",
-      key: "listener",
-      dataIndex: "listener",
+      title: "Listeners",
+      key: "listeners",
+      dataIndex: "listeners",
+      width: '20%',
     },
     {
       title: "Url",
       dataIndex: "url",
       key: "url",
+      width: '100px',
+      render:(val:string)=> <a href={val}>{val}</a>
     },
   ];
 
   return (
     <div className="top-list">
       <div className="main-body">
+       <div className='back-btn'><LeftCircleFilled onClick={()=>router.push('/')}/></div> 
         <div className="header-list">
           <img
             src={require("./../../assets/tracks.jpg")}
@@ -59,6 +76,8 @@ const TrackListComponent = () => {
               "https://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=1ea7c721c802722ddf3f4c5ef79077ce&format=json"
             }
             responseApi= 'tracks.track'
+            responseSearch = 'results.trackmatches.track'
+            type='tracks'
           />
         </div>
       </div>

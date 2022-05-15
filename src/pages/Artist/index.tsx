@@ -1,14 +1,24 @@
+import {useHistory} from 'react-router-dom'
+import { LeftCircleFilled } from '@ant-design/icons';
 import BaseListComponent from "../../components/baseList";
 
 import "./../style.scss";
 
 const ArtistListComponent = () => {
+  const router = useHistory()
+
   const columns = [
     {
-      title: "Name",
+      title: "Title",
       dataIndex: "name",
       key: "name",
-      // render: text => <a>{text}</a>,
+      width: '30%',
+      render: (val:string, record:any) =>(
+        <div className="d-flex col-name">
+          <img src={record.image[0]['#text']} alt='img' className="mr-3"/>
+          <p>{val}</p>
+        </div>
+      ),
     },
     {
       title: "Play Count",
@@ -21,20 +31,22 @@ const ArtistListComponent = () => {
       key: "streamable",
     },
     {
-      title: "Listener",
-      key: "listener",
-      dataIndex: "listener",
+      title: "Listeners",
+      key: "listeners",
+      dataIndex: "listeners",
     },
     {
       title: "Url",
       dataIndex: "url",
       key: "url",
+      render:(val:string)=> <a href={val}>{val}</a>
     },
   ];
 
   return (
     <div className="top-list">
       <div className="main-body">
+       <div className='back-btn'><LeftCircleFilled onClick={()=>router.push('/')}/></div> 
         <div className="header-list">
           <img
             src={require("./../../assets/artist.jpg")}
@@ -59,6 +71,8 @@ const ArtistListComponent = () => {
               "https://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=1ea7c721c802722ddf3f4c5ef79077ce&format=json"
             }
             responseApi= 'artists.artist'
+            responseSearch = 'results.artistmatches.artist'
+            type='artists'
           />
         </div>
       </div>
