@@ -1,0 +1,27 @@
+.upload-dragger {
+  .ant-upload.ant-upload-drag {
+    background: #e7f9ff;
+    border: 2px dashed #54d4ff;
+    border-radius: 8px;
+  }
+  .ant-upload-text {
+    font-size: 12px !important;
+    color: #8896a2 !important;
+  }
+  &.active {
+    .ant-upload.ant-upload-drag {
+      background: white;
+      .ant-upload-drag-icon {
+        .anticon {
+          color: #33baa2;
+        }
+      }
+    }
+  }
+}
+
+.hide {
+  .ant-form-item-required {
+    display: none !important;
+  }
+}

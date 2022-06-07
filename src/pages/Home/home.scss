@@ -1,0 +1,15 @@
+.main-container {
+  background: white;
+  border-radius: 20px;
+  width: 70vw;
+  margin: 50px;
+  padding: 60px 0px 50px 100px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+@media only screen and (max-width: 570px) {
+  .main-container {
+    padding: 60px 20px;
+    width: 100vw;
+  }
+}

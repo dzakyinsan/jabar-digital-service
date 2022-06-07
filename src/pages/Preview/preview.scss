@@ -1,0 +1,15 @@
+.main-container-preview {
+  background: white;
+  border-radius: 20px;
+  width: 50vw;
+  margin: 50px;
+  padding: 60px 0px 50px 100px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+@media only screen and (max-width: 1300px) {
+  .main-container-preview {
+    // padding: 60px 20px;
+    width: 80vw;
+  }
+}

@@ -1,19 +1,24 @@
-import { Route, BrowserRouter , Switch } from "react-router-dom";
+import { useState } from "react";
+import { Route, BrowserRouter, Switch } from "react-router-dom";
 
+import FormContext from "./context";
 import Home from "./pages/Home";
-import ArtistListComponent from "./pages/Artist";
-import TrackListComponent from "./pages/Tracks";
+import Preview from "./pages/Preview";
+import Background from './assets/bandung2.jpg';
 
 function App() {
+  const [form, setForm] = useState({});
+
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Switch>
-          <Route exact path={"/"} component={Home} />
-          <Route path={"/artist-list"} component={ArtistListComponent} />
-          <Route path={"/track-list"} component={TrackListComponent} />
-        </Switch>
-      </BrowserRouter>
+    <div className="App" style={{backgroundImage:`url(${Background})`}}>
+      <FormContext.Provider value={{ form, setForm }}>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path={"/"} component={Home} />
+            <Route exact path={"/preview"} component={Preview} />
+          </Switch>
+        </BrowserRouter>
+      </FormContext.Provider>
     </div>
   );
 }

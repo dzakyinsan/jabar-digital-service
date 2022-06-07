@@ -1,14 +1,15 @@
-import Category from "../../components/category.components";
+import FormComponent from "../../components/Form";
+import "./home.scss";
 
-import "./style.scss";
-
-export default function Home() {
+const Home = () => {
   return (
-    <div>
-      <div className="home">
-        <Category image={require("./../../assets/artist.jpg")} title={"Top Artist"} route={'/artist-list'}/>
-        <Category image={require("./../../assets/tracks.jpg")} title={"Top Tracks"} route={'/track-list'}/>
+    <div className="d-flex justify-content-center">
+      <div className="main-container">
+        <h3 className="mb-5 text-center">Form Bantuan Sosial</h3>
+        <FormComponent />
       </div>
     </div>
   );
-}
+};
+
+export default Home;
